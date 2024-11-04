@@ -1,77 +1,68 @@
 /* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
-    background-color: #f4f4f9;
+    padding: 20px;
 }
 
 .container {
-    max-width: 400px;
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+h1 {
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 label {
+    margin: 10px 0 5px;
     font-weight: bold;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="tel"],
-textarea {
-    width: 100%;
+input, select, textarea {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    resize: vertical;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
 }
 
-textarea {
-    min-height: 80px;
+input:focus, select:focus, textarea:focus {
+    border-color: #66afe9;
+    outline: none;
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
+    background-color: #5cb85c;
     color: white;
-    font-size: 16px;
     border: none;
     border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #4cae4c;
 }
 
-/* Gaya untuk pesan konfirmasi */
-#confirmationMessage {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #e7f5e6;
-    color: #2c6e49;
-    border: 1px solid #c3e6cb;
+.confirmation-message {
+    display: none;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
     border-radius: 5px;
-    font-size: 14px;
-    line-height: 1.6;
+    padding: 10px;
+    margin-top: 20px;
 }

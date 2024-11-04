@@ -1,9 +1,10 @@
-// script.js
 document.getElementById('orderForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     // Ambil data dari form
     const name = document.getElementById('name').value;
+    const department = document.getElementById('department').value;
+    const floorRoom = document.getElementById('floorRoom').value;
     const phone = document.getElementById('phone').value.trim(); // Menghapus spasi
     const order = document.getElementById('order').value;
 
@@ -17,6 +18,8 @@ document.getElementById('orderForm').addEventListener('submit', function (e) {
     // Format pesan untuk WhatsApp
     const message = `Halo, saya ingin memesan kebutuhan karyawan berikut:\n\n` +
                     `Nama: ${name}\n` +
+                    `Divisi/Departemen: ${department}\n` +
+                    `Kirim ke: ${floorRoom}\n` +
                     `Nomor Telepon: ${phone}\n` +
                     `Detail Pesanan: ${order}`;
 
@@ -26,8 +29,8 @@ document.getElementById('orderForm').addEventListener('submit', function (e) {
     // Buka WhatsApp dengan URL yang sudah diencode
     window.open(whatsappUrl, '_blank');
 
-    // Tampilkan pesan konfirmasi
-    const confirmationMessage = document.getElementById('confirmationMessage');
-    confirmationMessage.style.display = 'block';
-    confirmationMessage.innerHTML = `Pesanan Anda telah terkirim ke nomor <strong>${phone}</strong> dengan detail sebagai berikut:<br><br><strong>${order}</strong>`;
+    // Arahkan ke halaman rekap dengan parameter yang sesuai
+    const orderDetails = [department, floorRoom, order].join(', ');
+    const rekapUrl = `rekap.html?name=${encodeURIComponent(name)}&room=${encodeURIComponent(floorRoom)}&order=${encodeURIComponent(orderDetails)}`;
+    window.location.href = rekapUrl;
 });
