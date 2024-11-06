@@ -46,8 +46,8 @@
         <button type="submit">Kirim Pesanan</button>
 
         <!-- Pesan Konfirmasi -->
-        <div class="confirmation-message" id="confirmationMessage">
-            <!-- Isi pesan konfirmasi akan diisi oleh JavaScript -->
+        <div class="confirmation-message" id="confirmationMessage" style="display: none;">
+            <p>Pesanan Anda telah berhasil dikirim! Terima kasih.</p>
         </div>
     </form>
 </div>
@@ -56,6 +56,7 @@
     document.getElementById("orderForm").addEventListener("submit", async function(event) {
         event.preventDefault();
 
+        // Ambil data dari form
         const orderData = {
             name: document.getElementById("name").value,
             department: document.getElementById("department").value,
@@ -64,16 +65,30 @@
             details: document.getElementById("order").value
         };
 
-        const response = await fetch('http://localhost:3000/api/orders', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(orderData)
-        });
+        try {
+            // Mengirim data pesanan ke server
+            const response = await fetch('http://localhost:3000/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            });
 
-        if (response.ok) {
-            window.location.href = 'rekap.html'; // Redirect to confirmation page
+            // Jika response berhasil
+            if (response.ok) {
+                // Menampilkan pesan konfirmasi
+                document.getElementById("confirmationMessage").style.display = 'block';
+                // Mengarahkan ke halaman rekap
+                setTimeout(() => {
+                    window.location.href = 'rekap.html'; // Redirect to confirmation page
+                }, 2000);
+            } else {
+                alert('Gagal mengirim pesanan. Silakan coba lagi!');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan. Silakan coba lagi!');
         }
     });
 </script>
