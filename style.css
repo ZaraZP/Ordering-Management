@@ -100,3 +100,78 @@ button:hover {
         font-size: 14px;
     }
 }
+
+.order-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #0056b3;
+}
+
+.order-detail {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-detail ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-detail li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+.order-summary {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-summary li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.order-summary strong {
+    color: #333;
+}
+
+button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}

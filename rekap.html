@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekap Pesanan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Pesanan Berhasil Diajukan</h1>
+    <p>Terima kasih, <span id="customerName"></span>. Pesanan Anda telah berhasil dikirim dan akan segera diproses. Berikut detail pesanan Anda:</p>
+
+    <div class="order-summary">
+        <ul>
+            <li><strong>Nama Pemesan:</strong> <span id="summaryName"></span></li>
+            <li><strong>Divisi/Departemen:</strong> <span id="summaryDepartment"></span></li>
+            <li><strong>Lantai/Ruangan Tujuan:</strong> <span id="summaryFloorRoom"></span></li>
+            <li><strong>Nomor HP Pengirim:</strong> <span id="summaryPhone"></span></li>
+            <li><strong>Detail Pesanan:</strong> <span id="summaryOrder"></span></li>
+        </ul>
+    </div>
+
+    <p>Pesanan Anda sudah diteruskan ke bagian OB. Mohon menunggu, dan terima kasih atas kerja samanya.</p>
+
+    <button onclick="window.location.href='index.html'">Kembali ke Halaman Utama</button>
+</div>
+
+<script>
+    // Ambil data dari sessionStorage yang disimpan dari form sebelumnya
+    document.getElementById('summaryName').textContent = sessionStorage.getItem('name') || 'N/A';
+    document.getElementById('summaryDepartment').textContent = sessionStorage.getItem('department') || 'N/A';
+    document.getElementById('summaryFloorRoom').textContent = sessionStorage.getItem('floorRoom') || 'N/A';
+    document.getElementById('summaryPhone').textContent = sessionStorage.getItem('phone') || 'N/A';
+    document.getElementById('summaryOrder').textContent = sessionStorage.getItem('order') || 'N/A';
+
+    // Tampilkan nama di pesan sambutan
+    document.getElementById('customerName').textContent = sessionStorage.getItem('name') || 'Pelanggan';
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pesanan OB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Daftar Pesanan Menunggu</h1>
+    <div id="orderList"></div>
+
+    <div id="orderDetail" class="order-detail">
+        <h2>Detail Pesanan</h2>
+        <ul>
+            <li><strong>Nama Pemesan:</strong> <span id="detailName"></span></li>
+            <li><strong>Divisi/Departemen:</strong> <span id="detailDepartment"></span></li>
+            <li><strong>Lantai/Ruangan Tujuan:</strong> <span id="detailFloorRoom"></span></li>
+            <li><strong>Nomor HP Pengirim:</strong> <span id="detailPhone"></span></li>
+            <li><strong>Detail Pesanan:</strong> <span id="detailOrder"></span></li>
+        </ul>
+        <button onclick="markAsComplete()">Tandai Selesai</button>
+    </div>
+</div>
+
+<script>
+    // Contoh data pesanan yang tersimpan, bisa di-fetch dari database atau API
+    const orders = [
+        {
+            id: 1,
+            name: "Andi",
+            department: "HR",
+            floorRoom: "Lantai 1 - Ruang A",
+            phone: "+628123456789",
+            order: "5 botol air mineral"
+        },
+        {
+            id: 2,
+            name: "Budi",
+            department: "IT",
+            floorRoom: "Lantai 2 - Ruang C",
+            phone: "+628987654321",
+            order: "Kertas A4 1 rim"
+        }
+    ];
+
+    const orderList = document.getElementById("orderList");
+    const orderDetail = document.getElementById("orderDetail");
+
+    // Fungsi untuk menampilkan daftar pesanan
+    function displayOrders() {
+        orders.forEach(order => {
+            const orderButton = document.createElement("button");
+            orderButton.textContent = `Pesanan dari ${order.name} - ${order.department}`;
+            orderButton.className = "order-button";
+            orderButton.onclick = () => showOrderDetail(order);
+            orderList.appendChild(orderButton);
+        });
+    }
+
+    // Fungsi untuk menampilkan detail pesanan
+    function showOrderDetail(order) {
+        document.getElementById("detailName").textContent = order.name;
+        document.getElementById("detailDepartment").textContent = order.department;
+        document.getElementById("detailFloorRoom").textContent = order.floorRoom;
+        document.getElementById("detailPhone").textContent = order.phone;
+        document.getElementById("detailOrder").textContent = order.order;
+
+        orderDetail.style.display = "block";
+    }
+
+    // Fungsi untuk menandai pesanan sebagai selesai
+    function markAsComplete() {
+        alert("Pesanan ditandai sebagai selesai.");
+        orderDetail.style.display = "none";
+    }
+
+    // Inisialisasi tampilan daftar pesanan
+    displayOrders();
+</script>
+</body>
+</html>
