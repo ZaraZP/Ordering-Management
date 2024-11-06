@@ -10,36 +10,38 @@
 
 <div class="container">
     <h1>Daftar Pesanan</h1>
-    <ul id="orderList"></ul>
+    <div id="ordersList">
+        <!-- Orders will be dynamically added here -->
+    </div>
 </div>
 
 <script>
-    // Ambil daftar pesanan dari localStorage
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    // Retrieve orders from localStorage
+    const orders = JSON.parse(localStorage.getItem("ordersList")) || [];
 
-    const orderList = document.getElementById("orderList");
+    // Populate orders on the page
+    const ordersListDiv = document.getElementById("ordersList");
 
-    // Buat daftar pesanan
     orders.forEach((order, index) => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `
-            <strong>Nama Pemesan:</strong> ${order.name}<br>
-            <strong>Divisi/Departemen:</strong> ${order.department}<br>
-            <button onclick="showDetails(${index})">Lihat Detail</button>
+        const orderDiv = document.createElement("div");
+        orderDiv.className = "order-item";
+        orderDiv.innerHTML = `
+            <p><strong>Nama Pemesan:</strong> ${order.name}</p>
+            <p><strong>Divisi/Departemen:</strong> ${order.department}</p>
+            <p><strong>Lantai/Ruangan Tujuan:</strong> ${order.floorRoom}</p>
+            <p><strong>Nomor HP Pengirim:</strong> ${order.phone}</p>
+            <p><strong>Detail Pesanan:</strong> ${order.details}</p>
+            <button onclick="markAsCompleted(${index})">Selesai</button>
+            <hr>
         `;
-        orderList.appendChild(listItem);
+        ordersListDiv.appendChild(orderDiv);
     });
 
-    // Fungsi untuk menampilkan detail pesanan
-    function showDetails(index) {
-        const order = orders[index];
-        alert(`
-            Nama Pemesan: ${order.name}
-            Divisi/Departemen: ${order.department}
-            Lantai/Ruangan Tujuan: ${order.floorRoom}
-            Nomor HP Pengirim: ${order.phone}
-            Detail Pesanan: ${order.details}
-        `);
+    // Mark order as completed and remove it from the list
+    function markAsCompleted(index) {
+        orders.splice(index, 1);
+        localStorage.setItem("ordersList", JSON.stringify(orders));
+        location.reload(); // Reload the page to update the list
     }
 </script>
 

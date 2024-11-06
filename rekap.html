@@ -9,34 +9,35 @@
 <body>
 
 <div class="container">
-    <h1>Pesanan Berhasil Diajukan</h1>
-    <p>Terima kasih, <span id="customerName"></span>. Pesanan Anda telah berhasil dikirim dan akan segera diproses. Berikut detail pesanan Anda:</p>
-
-    <div class="order-summary">
-        <ul>
-            <li><strong>Nama Pemesan:</strong> <span id="summaryName"></span></li>
-            <li><strong>Divisi/Departemen:</strong> <span id="summaryDepartment"></span></li>
-            <li><strong>Lantai/Ruangan Tujuan:</strong> <span id="summaryFloorRoom"></span></li>
-            <li><strong>Nomor HP Pengirim:</strong> <span id="summaryPhone"></span></li>
-            <li><strong>Detail Pesanan:</strong> <span id="summaryOrder"></span></li>
-        </ul>
+    <h1>Pesanan Berhasil</h1>
+    <div id="confirmationMessage">
+        <!-- JavaScript will insert the order summary here -->
     </div>
-
-    <p>Pesanan Anda sudah diteruskan ke bagian OB. Mohon menunggu, dan terima kasih atas kerja samanya.</p>
-
-    <button onclick="window.location.href='index.html'">Kembali ke Halaman Utama</button>
+    <a href="index.html">Kembali ke Halaman Pemesanan</a>
 </div>
 
 <script>
-    // Ambil data dari sessionStorage yang disimpan dari form sebelumnya
-    document.getElementById('summaryName').textContent = sessionStorage.getItem('name') || 'N/A';
-    document.getElementById('summaryDepartment').textContent = sessionStorage.getItem('department') || 'N/A';
-    document.getElementById('summaryFloorRoom').textContent = sessionStorage.getItem('floorRoom') || 'N/A';
-    document.getElementById('summaryPhone').textContent = sessionStorage.getItem('phone') || 'N/A';
-    document.getElementById('summaryOrder').textContent = sessionStorage.getItem('order') || 'N/A';
+    // Retrieve order data from localStorage
+    const name = localStorage.getItem("orderName");
+    const department = localStorage.getItem("orderDepartment");
+    const floorRoom = localStorage.getItem("orderFloorRoom");
+    const phone = localStorage.getItem("orderPhone");
+    const orderDetails = localStorage.getItem("orderDetails");
 
-    // Tampilkan nama di pesan sambutan
-    document.getElementById('customerName').textContent = sessionStorage.getItem('name') || 'Pelanggan';
+    // Display the confirmation message
+    document.getElementById('confirmationMessage').innerHTML = `
+        <p>Terima kasih, ${name}. Pesanan Anda telah berhasil dikirim dan akan segera diproses.</p>
+        <p><strong>Detail Pesanan:</strong></p>
+        <ul>
+            <li>Nama Pemesan: ${name}</li>
+            <li>Divisi/Departemen: ${department}</li>
+            <li>Lantai/Ruangan Tujuan: ${floorRoom}</li>
+            <li>Nomor HP Pengirim: ${phone}</li>
+            <li>Detail Pesanan: ${orderDetails}</li>
+        </ul>
+        <p>Pesanan Anda sudah diteruskan ke bagian OB. Mohon menunggu, dan terima kasih atas kerja samanya.</p>
+    `;
 </script>
+
 </body>
 </html>
