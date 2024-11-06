@@ -15,16 +15,14 @@
     </div>
     <a href="index.html">Kembali ke Halaman Pemesanan</a>
 </div>
-
 <script>
-    // Retrieve order data from localStorage
+    // Display order confirmation from localStorage or API response
     const name = localStorage.getItem("orderName");
     const department = localStorage.getItem("orderDepartment");
     const floorRoom = localStorage.getItem("orderFloorRoom");
     const phone = localStorage.getItem("orderPhone");
     const orderDetails = localStorage.getItem("orderDetails");
 
-    // Display the confirmation message
     document.getElementById('confirmationMessage').innerHTML = `
         <p>Terima kasih, ${name}. Pesanan Anda telah berhasil dikirim dan akan segera diproses.</p>
         <p><strong>Detail Pesanan:</strong></p>
@@ -35,7 +33,6 @@
             <li>Nomor HP Pengirim: ${phone}</li>
             <li>Detail Pesanan: ${orderDetails}</li>
         </ul>
-        <p>Pesanan Anda sudah diteruskan ke bagian OB. Mohon menunggu, dan terima kasih atas kerja samanya.</p>
     `;
 </script>
 

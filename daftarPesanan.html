@@ -14,57 +14,41 @@
         <!-- Orders will be dynamically added here -->
     </div>
 </div>
-
 <script>
-    // Retrieve orders from localStorage
-    const orders = JSON.parse(localStorage.getItem("ordersList")) || [];
+    async function fetchOrders() {
+        const response = await fetch('http://localhost:3000/api/orders');
+        const orders = await response.json();
+        
+        const ordersListDiv = document.getElementById("ordersList");
+        ordersListDiv.innerHTML = ""; // Clear previous list
 
-    // Populate orders on the page
-    const ordersListDiv = document.getElementById("ordersList");
+        orders.forEach((order, index) => {
+            const orderDiv = document.createElement("div");
+            orderDiv.className = "order-item";
+            orderDiv.innerHTML = `
+                <p><strong>Nama Pemesan:</strong> ${order.name}</p>
+                <p><strong>Divisi/Departemen:</strong> ${order.department}</p>
+                <p><strong>Lantai/Ruangan Tujuan:</strong> ${order.floorRoom}</p>
+                <p><strong>Nomor HP Pengirim:</strong> ${order.phone}</p>
+                <p><strong>Detail Pesanan:</strong> ${order.details}</p>
+                <button onclick="markAsCompleted(${index})">Selesai</button>
+                <hr>
+            `;
+            ordersListDiv.appendChild(orderDiv);
+        });
+    }
 
-    orders.forEach((order, index) => {
-        const orderDiv = document.createElement("div");
-        orderDiv.className = "order-item";
-        orderDiv.innerHTML = `
-            <p><strong>Nama Pemesan:</strong> ${order.name}</p>
-            <p><strong>Divisi/Departemen:</strong> ${order.department}</p>
-            <p><strong>Lantai/Ruangan Tujuan:</strong> ${order.floorRoom}</p>
-            <p><strong>Nomor HP Pengirim:</strong> ${order.phone}</p>
-            <p><strong>Detail Pesanan:</strong> ${order.details}</p>
-            <button onclick="markAsCompleted(${index})">Selesai</button>
-            <hr>
-        `;
-        ordersListDiv.appendChild(orderDiv);
-    });
+    async function markAsCompleted(index) {
+        const response = await fetch(`http://localhost:3000/api/orders/${index}`, {
+            method: 'DELETE'
+        });
 
-    function markAsCompleted(index) {
-    const orders = JSON.parse(localStorage.getItem("ordersList")) || [];
-    orders.splice(index, 1);
-    localStorage.setItem("ordersList", JSON.stringify(orders));
-    // Perbarui tampilan tanpa reload
-    renderOrders();
-}
+        if (response.ok) {
+            fetchOrders(); // Update the list after deleting the order
+        }
+    }
 
-// Tambahkan fungsi renderOrders untuk memperbarui daftar tampilan
-function renderOrders() {
-    ordersListDiv.innerHTML = ""; // Bersihkan elemen sebelum di-update
-    const orders = JSON.parse(localStorage.getItem("ordersList")) || [];
-    orders.forEach((order, index) => {
-        const orderDiv = document.createElement("div");
-        orderDiv.className = "order-item";
-        orderDiv.innerHTML = `
-            <p><strong>Nama Pemesan:</strong> ${order.name}</p>
-            <p><strong>Divisi/Departemen:</strong> ${order.department}</p>
-            <p><strong>Lantai/Ruangan Tujuan:</strong> ${order.floorRoom}</p>
-            <p><strong>Nomor HP Pengirim:</strong> ${order.phone}</p>
-            <p><strong>Detail Pesanan:</strong> ${order.details}</p>
-            <button onclick="markAsCompleted(${index})">Selesai</button>
-            <hr>
-        `;
-        ordersListDiv.appendChild(orderDiv);
-    });
-}
-
+    fetchOrders(); // Call the function to populate orders on page load
 </script>
 
 </body>

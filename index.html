@@ -52,6 +52,31 @@
     </form>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js">
+    document.getElementById("orderForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const orderData = {
+            name: document.getElementById("name").value,
+            department: document.getElementById("department").value,
+            floorRoom: document.getElementById("floorRoom").value,
+            phone: document.getElementById("phone").value,
+            details: document.getElementById("order").value
+        };
+
+        const response = await fetch('http://localhost:3000/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
+
+        if (response.ok) {
+            window.location.href = 'rekap.html'; // Redirect to confirmation page
+        }
+    });
+</script>
+
 </body>
 </html>
