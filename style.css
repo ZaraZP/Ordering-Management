@@ -3,23 +3,37 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
+/* Container */
 .container {
     max-width: 600px;
-    margin: 0 auto;
+    width: 90%; /* Responsif untuk layar kecil */
+    margin: 20px;
     padding: 20px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 15px; /* Membulatkan sudut */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.container:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15); /* Efek hover untuk sedikit bayangan lebih kuat */
 }
 
 h1 {
     text-align: center;
     color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
@@ -28,28 +42,33 @@ form {
 label {
     margin: 10px 0 5px;
     font-weight: bold;
+    color: #333;
 }
 
 input, select, textarea {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px; /* Membulatkan sudut */
     margin-bottom: 15px;
     transition: border-color 0.3s;
+    font-size: 16px;
 }
 
 input:focus, select:focus, textarea:focus {
     border-color: #66afe9;
     outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
 }
 
+/* Button Styling */
 button {
     background-color: #5cb85c;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 12px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s;
 }
 
@@ -57,13 +76,27 @@ button:hover {
     background-color: #4cae4c;
 }
 
+/* Confirmation Message Styling */
 .confirmation-message {
     display: none;
     background-color: #dff0d8;
     color: #3c763d;
     border: 1px solid #d6e9c6;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 15px;
     margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
 }
-  
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 20px;
+    }
+    button {
+        font-size: 14px;
+    }
+    input, select, textarea {
+        font-size: 14px;
+    }
+}

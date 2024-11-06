@@ -11,9 +11,11 @@
 <div class="container">
     <h1>Form Pesanan</h1>
     <form id="orderForm">
+        <!-- Nama Pemesan -->
         <label for="name">Nama Pemesan:</label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" placeholder="Masukkan nama Anda" required>
 
+        <!-- Divisi/Departemen -->
         <label for="department">Divisi/Departemen:</label>
         <select id="department" required>
             <option value="" disabled selected>Pilih Divisi/Departemen</option>
@@ -23,6 +25,7 @@
             <option value="Marketing">Marketing</option>
         </select>
 
+        <!-- Lantai/Ruangan -->
         <label for="floorRoom">Kirim ke Lantai/Ruangan:</label>
         <select id="floorRoom" required>
             <option value="" disabled selected>Pilih Lantai/Ruangan</option>
@@ -31,14 +34,21 @@
             <option value="Lantai 2 - Ruang C">Lantai 2 - Ruang C</option>
         </select>
 
+        <!-- Nomor HP Pengirim -->
         <label for="phone">Nomor HP Pengirim:</label>
         <input type="tel" id="phone" placeholder="+62xxxxxxxxxx" required>
 
+        <!-- Detail Pesanan -->
         <label for="order">Detail Pesanan:</label>
-        <textarea id="order" rows="4" required></textarea>
+        <textarea id="order" rows="4" placeholder="Masukkan detail pesanan Anda" required></textarea>
 
+        <!-- Tombol Kirim -->
         <button type="submit">Kirim Pesanan</button>
-        <div class="confirmation-message" id="confirmationMessage"></div>
+
+        <!-- Pesan Konfirmasi -->
+        <div class="confirmation-message" id="confirmationMessage">
+            <!-- Isi pesan konfirmasi akan diisi oleh JavaScript -->
+        </div>
     </form>
 </div>
 
