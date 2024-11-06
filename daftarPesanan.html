@@ -37,12 +37,34 @@
         ordersListDiv.appendChild(orderDiv);
     });
 
-    // Mark order as completed and remove it from the list
     function markAsCompleted(index) {
-        orders.splice(index, 1);
-        localStorage.setItem("ordersList", JSON.stringify(orders));
-        location.reload(); // Reload the page to update the list
-    }
+    const orders = JSON.parse(localStorage.getItem("ordersList")) || [];
+    orders.splice(index, 1);
+    localStorage.setItem("ordersList", JSON.stringify(orders));
+    // Perbarui tampilan tanpa reload
+    renderOrders();
+}
+
+// Tambahkan fungsi renderOrders untuk memperbarui daftar tampilan
+function renderOrders() {
+    ordersListDiv.innerHTML = ""; // Bersihkan elemen sebelum di-update
+    const orders = JSON.parse(localStorage.getItem("ordersList")) || [];
+    orders.forEach((order, index) => {
+        const orderDiv = document.createElement("div");
+        orderDiv.className = "order-item";
+        orderDiv.innerHTML = `
+            <p><strong>Nama Pemesan:</strong> ${order.name}</p>
+            <p><strong>Divisi/Departemen:</strong> ${order.department}</p>
+            <p><strong>Lantai/Ruangan Tujuan:</strong> ${order.floorRoom}</p>
+            <p><strong>Nomor HP Pengirim:</strong> ${order.phone}</p>
+            <p><strong>Detail Pesanan:</strong> ${order.details}</p>
+            <button onclick="markAsCompleted(${index})">Selesai</button>
+            <hr>
+        `;
+        ordersListDiv.appendChild(orderDiv);
+    });
+}
+
 </script>
 
 </body>
