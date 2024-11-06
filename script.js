@@ -53,6 +53,7 @@ async function updateOrdersToJSONbin(newOrder) {
         console.error('Error saat memperbarui pesanan:', error);
     }
 }
+
 // Fungsi untuk mengambil dan menampilkan daftar pesanan dari JSONbin
 async function fetchOrdersFromJSONbin() {
     const BIN_ID = '672ae9bcad19ca34f8c4fcc2';  // Bin ID kamu
@@ -88,18 +89,17 @@ async function fetchOrdersFromJSONbin() {
             ordersListDiv.appendChild(orderDiv);
         });
     } catch (error) {
-        console.error('Error saat mengambil data pesanan:', error);
+        console.error('Error saat mengambil pesanan:', error);
     }
 }
 
-// Fungsi untuk menandai pesanan selesai
-async function markAsCompleted(index) {
-    const BIN_ID = '672ae9bcad19ca34f8c4fcc2';  // Bin ID kamu
-    const API_KEY = '$2a$10$FEfu2ALqeZP6wP1RJPK/g.FdAmKCn5yaYKSA/CTb73jsQKreyR7gK';  // X-Master-Key kamu
+// Fungsi untuk menandai pesanan sebagai selesai
+async function markAsCompleted(orderIndex) {
+    const BIN_ID = '672ae9bcad19ca34f8c4fcc2';
+    const API_KEY = '$2a$10$FEfu2ALqeZP6wP1RJPK/g.FdAmKCn5yaYKSA/CTb73jsQKreyR7gK';
     const UPDATE_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
     try {
-        // Ambil data pesanan yang ada
         const response = await fetch(UPDATE_URL, {
             headers: {
                 'X-Master-Key': API_KEY
@@ -108,28 +108,22 @@ async function markAsCompleted(index) {
         const data = await response.json();
         const orders = data.orders || [];
 
-        // Hapus pesanan yang sudah selesai
-        orders.splice(index, 1);
+        // Menandai pesanan sebagai selesai
+        orders[orderIndex].status = 'Selesai';
 
-        // Update daftar pesanan di JSONbin
+        // Update data di JSONbin
         const updateResponse = await fetch(UPDATE_URL, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'X-Master-Key': API_KEY
             },
-            body: JSON.stringify({ orders: orders })
+            body: JSON.stringify({ orders })
         });
 
         const result = await updateResponse.json();
-        console.log('Pesanan selesai dan daftar diperbarui:', result);
-
-        // Refresh daftar pesanan
-        fetchOrdersFromJSONbin();
+        console.log('Pesanan berhasil ditandai sebagai selesai:', result);
     } catch (error) {
-        console.error('Error saat memperbarui daftar pesanan:', error);
+        console.error('Error saat menandai pesanan selesai:', error);
     }
 }
-
-// Ambil dan tampilkan pesanan ketika halaman dimuat
-fetchOrdersFromJSONbin();

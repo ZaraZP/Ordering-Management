@@ -7,34 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="container">
-    <h1>Pesanan Berhasil</h1>
-    <div id="confirmationMessage">
-        <!-- JavaScript will insert the order summary here -->
+    <div class="container">
+        <h1>Rekap Pesanan</h1>
+        <div id="ordersList"></div>
     </div>
-    <a href="index.html">Kembali ke Halaman Pemesanan</a>
-</div>
-<script>
-    // Display order confirmation from localStorage or API response
-    const name = localStorage.getItem("orderName");
-    const department = localStorage.getItem("orderDepartment");
-    const floorRoom = localStorage.getItem("orderFloorRoom");
-    const phone = localStorage.getItem("orderPhone");
-    const orderDetails = localStorage.getItem("orderDetails");
-
-    document.getElementById('confirmationMessage').innerHTML = `
-        <p>Terima kasih, ${name}. Pesanan Anda telah berhasil dikirim dan akan segera diproses.</p>
-        <p><strong>Detail Pesanan:</strong></p>
-        <ul>
-            <li>Nama Pemesan: ${name}</li>
-            <li>Divisi/Departemen: ${department}</li>
-            <li>Lantai/Ruangan Tujuan: ${floorRoom}</li>
-            <li>Nomor HP Pengirim: ${phone}</li>
-            <li>Detail Pesanan: ${orderDetails}</li>
-        </ul>
-    `;
-</script>
-
+    <script src="script.js"></script>
+    <script>
+        fetchOrdersFromJSONbin();
+    </script>
 </body>
 </html>
